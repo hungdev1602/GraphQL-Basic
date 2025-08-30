@@ -1,9 +1,10 @@
 import express, { Express, Request, Response } from "express"
 import dotenv from "dotenv"
 import { connectDB } from "./configs/database"
-import { Article } from "./models/article.model"
 import { ApolloServer } from "@apollo/server"
 import { startStandaloneServer } from '@apollo/server/standalone';
+import { typeDefs } from "./typeDefs"
+import { resolvers } from "./resolvers";
 dotenv.config()
 
 const startSever = async () => {
@@ -26,20 +27,6 @@ const startSever = async () => {
   // END REST API ==================================================================
 
   // GraphQL API ==================================================================
-  const typeDefs = `#graphql
-    type Query {
-      hello: String
-    }
-  `
-
-  const resolvers = {
-    Query: {
-      hello: () => {
-        return "Hello world!"
-      }
-    }
-  }
-
   const apolloServer = new ApolloServer({
     typeDefs: typeDefs,
     resolvers: resolvers
