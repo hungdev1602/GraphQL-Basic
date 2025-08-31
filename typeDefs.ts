@@ -11,4 +11,14 @@ export const typeDefs = `#graphql
     getListArticle: [Article],
     getArticleById(id: String): Article
   }
+
+  input ArticleInput {
+    title: String,
+    avatar: String,
+    description: String
+  }
+
+  type Mutation {
+    createArticle(article: ArticleInput): Article
+  }
 `
